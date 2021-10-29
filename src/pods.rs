@@ -1,13 +1,18 @@
+use clap::ArgMatches;
 use k8s_openapi::api::core::v1::Pod;
 use kube::Client;
 use kube::api::{Api, ListParams};
 use tokio::runtime::Runtime;
 use super::err::AnnyeongError;
 
-pub fn trigger_list_pods() -> Result<(), Box<dyn std::error::Error>> {
-    let rt = Runtime::new()?;
+const NS: &str = "namespace";
+const DEFAULT_NS: &str = "default";
 
-    let res = rt.block_on(get_pods("default"));
+pub fn trigger_list_pods(args: &ArgMatches) -> Result<(), Box<dyn std::error::Error>> {
+    let namespace = args.value_of(NS);
+
+    let rt = Runtime::new()?;
+    let res = rt.block_on(get_pods(namespace.unwrap_or(DEFAULT_NS)));
 
     if let Ok(pods) = res {
         for p in pods {
