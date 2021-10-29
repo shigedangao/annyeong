@@ -16,11 +16,14 @@ jobs:
       - name: install some pods
         run: |
            kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+      - name: install latest rust
+        run: rustup update
       - name: test app
         run: cargo test
 
   build:
     runs-on: ubuntu-20.04
+    needs: test
     steps:
       - uses: actions/checkout@v2
       - name: Docker meta
