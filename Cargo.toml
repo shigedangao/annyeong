@@ -1,0 +1,12 @@
+[package]
+name = "annyeong"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = "3.0.0-beta.5"
+tokio = { version = "1.12.0", features = ["full"] }
+kube = { version = "0.63.2", features = ["runtime","derive"] }
+k8s-openapi = { version = "0.13.1", default-features = false, features = ["v1_22"] }
