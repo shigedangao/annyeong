@@ -38,3 +38,15 @@ pub async fn get_pods(ns: &str) -> Result<Vec<String>, kube::Error> {
 
     Ok(pod_list)
 }
+
+#[cfg(test)]
+mod tests {
+    #[tokio::test]
+    async fn expect_to_get_pods() {
+        let pods = super::get_pods("default").await;
+        assert!(pods.is_ok());
+
+        let pods_list = pods.unwrap();
+        assert!(!pods_list.is_empty());
+    }
+}

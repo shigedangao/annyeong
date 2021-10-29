@@ -5,6 +5,20 @@ on:
      - main
 
 jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: debianmaster/actions-k3s@master
+        id: k3s
+        with:
+          version: 'latest'
+      - name: install some pods
+        run: |
+           kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+      - name: test app
+        run: cargo test
+
   build:
     runs-on: ubuntu-20.04
     steps:
