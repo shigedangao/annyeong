@@ -11,7 +11,7 @@ pub enum AnnyeongError {
 impl fmt::Display for AnnyeongError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            AnnyeongError::CommandNotFound => write!(f, "Command not found"),
+            AnnyeongError::CommandNotFound => write!(f, "Subcommand not found"),
             AnnyeongError::KubeError(value) => write!(f, "Error with kubernetes {}", value)
         }
     }

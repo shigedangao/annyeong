@@ -22,7 +22,6 @@ pub fn trigger_list_pods(args: &ArgMatches) -> Result<(), Box<dyn std::error::Er
         return Ok(())
     }
 
-    
     Err(Box::new(AnnyeongError::from(res.unwrap_err())))
 }
 
